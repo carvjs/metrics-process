@@ -1,0 +1,66 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch --target node",
+    "build": "tsdx build --target node",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build --target node",
+    "release": "np"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "name": "@carv/metrics-process",
+  "author": "Sascha Tandel",
+  "homepage": "https://github.com/carvjs/metrics-process#readme",
+  "bugs": {
+    "url": "https://github.com/carvjs/metrics-process/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvjs/metrics-process.git"
+  },
+  "module": "dist/metrics-process.esm.js",
+  "devDependencies": {
+    "@carv/telemetry": "^1.0.4",
+    "at-least-node": "^1.0.0",
+    "husky": "^4.3.0",
+    "np": "^6.5.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.3"
+  },
+  "resolutions": {
+    "**/@typescript-eslint/eslint-plugin": "^4.1.1",
+    "**/@typescript-eslint/parser": "^4.1.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@carv/stdlib": "^1.0.0",
+    "@carv/time": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@carv/telemetry": "1.x"
+  }
+}
