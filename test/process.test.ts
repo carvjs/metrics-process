@@ -36,11 +36,7 @@ test('processMetrics', async () => {
   await telemetry.ready()
 
   if (!eventLoopDelaySupported) {
-    expect(telemetry.log.warn).toHaveBeenCalledWith(
-      '[%s] Monitoring the event loop delay is not supported on Node.js %s',
-      'process_event_loop_delay',
-      process.version,
-    )
+    expect(telemetry.log.warn).not.toHaveBeenCalled()
   }
 
   // Do something
@@ -70,3 +66,19 @@ test('processMetrics', async () => {
   expect(metrics).toMatch('# TYPE process_uptime_seconds gauge')
   expect(metrics).toMatch('# TYPE process_version_info gauge')
 })
+
+if (!eventLoopDelaySupported) {
+  test('processMetrics (warn missing event loop monitoring support)', async () => {
+    telemetry.log.warn = jest.fn()
+
+    telemetry.use(processMetrics, { eventLoopDelay: true })
+
+    await telemetry.ready()
+
+    expect(telemetry.log.warn).toHaveBeenCalledWith(
+      '[%s] Monitoring the event loop delay is not supported on Node.js %s',
+      'process_event_loop_delay',
+      process.version,
+    )
+  })
+}

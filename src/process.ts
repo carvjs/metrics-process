@@ -1,3 +1,5 @@
+import { monitorEventLoopDelay } from 'perf_hooks'
+
 import { Telemetry } from '@carv/telemetry'
 
 import { ProcessOptions, ProcessCommonOptions } from './types'
@@ -24,7 +26,7 @@ export function processMetrics(
     memory = true,
     heapSpace = true,
     gc = true,
-    eventLoopDelay = true,
+    eventLoopDelay = Boolean(monitorEventLoopDelay),
   }: ProcessOptions,
   done: () => void,
 ) {
