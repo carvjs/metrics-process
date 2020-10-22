@@ -41,7 +41,6 @@
   "module": "dist/metrics-process.esm.js",
   "devDependencies": {
     "@carv/telemetry": "^1.1.0",
-    "at-least-node": "^1.0.0",
     "husky": "^4.3.0",
     "np": "^6.5.0",
     "tsdx": "^0.14.1",

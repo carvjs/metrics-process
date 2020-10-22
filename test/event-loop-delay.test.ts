@@ -4,11 +4,9 @@
 import { promisify } from 'util'
 import { performance } from 'perf_hooks'
 
-import atLeastNode from 'at-least-node'
-
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processEventLoopDelay } from '../src'
+import { processEventLoopDelay, isMonitorEventLoopDelaySupported } from '../src'
 
 jest.useFakeTimers()
 
@@ -24,7 +22,7 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-if (atLeastNode('11.10.0')) {
+if (isMonitorEventLoopDelaySupported) {
   test('processEventLoopDelay', async () => {
     telemetry.use(processEventLoopDelay, { resolution: 1 })
 

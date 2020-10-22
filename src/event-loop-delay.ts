@@ -7,6 +7,8 @@ import { nanosToSeconds } from '@carv/time'
 
 import { ProcessEventLoopDelayOptions } from './types'
 
+export const isMonitorEventLoopDelaySupported = Boolean(monitorEventLoopDelay)
+
 export function processEventLoopDelay(
   telemetry: Telemetry,
   {
@@ -20,7 +22,7 @@ export function processEventLoopDelay(
   }: ProcessEventLoopDelayOptions,
   done: () => void,
 ) {
-  if (!monitorEventLoopDelay) {
+  if (!isMonitorEventLoopDelaySupported) {
     telemetry.log.warn(
       '[%s] Monitoring the event loop delay is not supported on Node.js %s',
       telemetry.makeName(prefix, name),

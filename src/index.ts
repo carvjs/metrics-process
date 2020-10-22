@@ -1,6 +1,7 @@
+export { processMetrics as default } from './process'
+
 export * from './types'
 export * from './process'
-export { processMetrics as default } from './process'
 
 export * from './cpu-usage'
 export * from './event-loop-delay'
