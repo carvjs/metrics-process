@@ -40,7 +40,7 @@
   },
   "module": "dist/metrics-process.esm.js",
   "devDependencies": {
-    "@carv/telemetry": "^1.0.4",
+    "@carv/telemetry": "^1.1.0",
     "at-least-node": "^1.0.0",
     "husky": "^4.3.0",
     "np": "^6.5.0",
@@ -61,6 +61,6 @@
     "@carv/time": "^1.0.0"
   },
   "peerDependencies": {
-    "@carv/telemetry": "1.x"
+    "@carv/telemetry": "^1.1.0"
   }
 }

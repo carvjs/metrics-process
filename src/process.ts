@@ -28,14 +28,14 @@ export function processMetrics(
   }: ProcessOptions,
   done: () => void,
 ) {
-  const namePrefix = prefix + name + '_'
+  const namePrefix = telemetry.makeName(prefix, name)
 
   const mergeOptions = <T extends ProcessCommonOptions>(config: true | undefined | T): T => {
-    const { prefix = '', ...options } = !config || config === true ? ({} as T) : config
+    const { prefix, ...options } = !config || config === true ? ({} as T) : config
 
     return {
       ...options,
-      prefix: namePrefix + prefix,
+      prefix: telemetry.makeName(namePrefix, prefix),
       labels: { ...labels, ...options.labels },
     } as T
   }

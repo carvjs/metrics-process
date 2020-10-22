@@ -10,7 +10,7 @@ import { ProcessEventLoopDelayOptions } from './types'
 export function processEventLoopDelay(
   telemetry: Telemetry,
   {
-    prefix = 'process_',
+    prefix = 'process',
     name = 'event_loop_delay',
     description = 'Approximate mean event loop delay in seconds.',
     labels,
@@ -23,37 +23,35 @@ export function processEventLoopDelay(
   if (!monitorEventLoopDelay) {
     telemetry.log.warn(
       '[%s] Monitoring the event loop delay is not supported on Node.js %s',
-      prefix + name,
+      telemetry.makeName(prefix, name),
       process.version,
     )
     done()
     return
   }
 
-  const namePrefix = prefix + name + '_'
-
   const delayMinimum = telemetry.createValueRecorder({
-    name: namePrefix + 'min_seconds',
+    name: telemetry.makeName(prefix, name, 'min_seconds'),
     description: 'The minimum recorded event loop delay.',
   })
 
   const delayMaximum = telemetry.createValueRecorder({
-    name: namePrefix + 'max_seconds',
+    name: telemetry.makeName(prefix, name, 'max_seconds'),
     description: 'The maximum recorded event loop delay.',
   })
 
   const delayMean = telemetry.createValueRecorder({
-    name: namePrefix + 'mean_seconds',
+    name: telemetry.makeName(prefix, name, 'mean_seconds'),
     description,
   })
 
   const delayStddev = telemetry.createValueRecorder({
-    name: namePrefix + 'stddev_seconds',
+    name: telemetry.makeName(prefix, name, 'stddev_seconds'),
     description: 'The standard deviation recorded event loop delay.',
   })
 
   const quantiles = telemetry.createValueRecorder({
-    name: namePrefix + `seconds`,
+    name: telemetry.makeName(prefix, name, `seconds`),
     description: `The recorded event loop delay quantiles.`,
   })
 

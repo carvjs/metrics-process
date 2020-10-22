@@ -6,27 +6,25 @@ import { ProcessCpuUsageOptions } from './types'
 export function processCpuUsage(
   telemetry: Telemetry,
   {
-    prefix = 'process_',
+    prefix = 'process',
     name = 'cpu',
     description = 'process CPU time spent in seconds (batch observer)',
     labels,
   }: ProcessCpuUsageOptions,
   done: () => void,
 ) {
-  const namePrefix = prefix + name + '_'
-
   const cpuUserUsageCounter = telemetry.createSumObserver({
-    name: namePrefix + 'user_seconds_total',
+    name: telemetry.makeName(prefix, name, 'user_seconds_total'),
     description: 'Total user CPU time spent in seconds.',
   })
 
   const cpuSystemUsageCounter = telemetry.createSumObserver({
-    name: namePrefix + 'system_seconds_total',
+    name: telemetry.makeName(prefix, name, 'system_seconds_total'),
     description: 'Total system CPU time spent in seconds.',
   })
 
   const cpuUsageCounter = telemetry.createSumObserver({
-    name: namePrefix + 'seconds_total',
+    name: telemetry.makeName(prefix, name, 'seconds_total'),
     description: 'Total user and system CPU time spent in seconds.',
   })
 

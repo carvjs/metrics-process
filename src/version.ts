@@ -5,7 +5,7 @@ import { ProcessVersionOptions } from './types'
 export function processVersion(
   telemetry: Telemetry,
   {
-    prefix = 'process_',
+    prefix = 'process',
     name = 'version_info',
     description = 'Node.js version info.',
     labels,
@@ -20,7 +20,8 @@ export function processVersion(
 
   telemetry.createValueObserver(
     {
-      name: prefix + name,
+      prefix,
+      name,
       description,
       labels: { ...labels, version, major, minor, patch },
     },

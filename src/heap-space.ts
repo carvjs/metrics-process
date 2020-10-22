@@ -7,27 +7,25 @@ import { ProcessHeapSpaceOptions } from './types'
 export function processHeapSpace(
   telemetry: Telemetry,
   {
-    prefix = 'process_',
+    prefix = 'process',
     name = 'heap_space_size',
     description = 'Statistics about the V8 heap spaces (batch observer)',
     labels,
   }: ProcessHeapSpaceOptions,
   done: () => void,
 ) {
-  const namePrefix = prefix + name + '_'
-
   const total = telemetry.createUpDownCounter({
-    name: namePrefix + 'total_bytes',
+    name: telemetry.makeName(prefix, name, 'total_bytes'),
     description: 'Process heap space size total from Node.js in bytes.',
   })
 
   const used = telemetry.createUpDownCounter({
-    name: namePrefix + 'used_bytes',
+    name: telemetry.makeName(prefix, name, 'used_bytes'),
     description: 'Process heap space size used from Node.js in bytes.',
   })
 
   const available = telemetry.createUpDownCounter({
-    name: namePrefix + 'available_bytes',
+    name: telemetry.makeName(prefix, name, 'available_bytes'),
     description: 'Process heap space size available from Node.js in bytes.',
   })
 

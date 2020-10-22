@@ -17,7 +17,7 @@ kinds[constants.NODE_PERFORMANCE_GC_WEAKCB] = 'weakcb'
 export function processGcDuration(
   telemetry: Telemetry,
   {
-    prefix = 'process_',
+    prefix = 'process',
     name = 'gc_duration_seconds',
     description = 'Garbage collection duration by kind, one of major, minor, incremental or weakcb.',
     labels,
@@ -34,7 +34,8 @@ export function processGcDuration(
   }
 
   const metric = telemetry.createValueRecorder({
-    name: prefix + name,
+    prefix,
+    name,
     description,
     labels,
     boundaries,

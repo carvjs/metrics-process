@@ -877,10 +877,10 @@
   dependencies:
     "@carv/is" "^1.0.1"
 
-"@carv/telemetry@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/@carv/telemetry/-/telemetry-1.0.4.tgz#fa827967fcc7ffd2fecb197f3224a21dc1e582e8"
-  integrity sha512-hHEjO99LB/EZXgceVG0l+KL9nyqa6xkhBMLB2Xxy2Dk5CZaUML2SaVKLaoCD//eq1Hj2pBTOfPTS+nGWSW5/aA==
+"@carv/telemetry@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@carv/telemetry/-/telemetry-1.1.0.tgz#e4d2d16bfe53523496d76aaf30a8725b4a31b1cc"
+  integrity sha512-cYdleTi/7AC+/ZgybegldsmPIKnY54IDJPbAMpSzp2ALa4B1cAkiY3aGKzody+G0PgnNzucDQU3nsHk7JcMKWQ==
   dependencies:
     "@carv/is" "^1.0.0"
     "@carv/stdlib" "^1.0.2"

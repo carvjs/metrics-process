@@ -70,7 +70,7 @@ test('processCpuUsage (with labels)', async () => {
 })
 
 test('processCpuUsage (custom prefix)', async () => {
-  telemetry.use(processCpuUsage, { prefix: 'nodejs_' })
+  telemetry.use(processCpuUsage, { prefix: 'nodejs' })
 
   await telemetry.ready()
 
