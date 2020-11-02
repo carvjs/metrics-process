@@ -4,6 +4,10 @@ import { ProcessOptions, ProcessCommonOptions } from './types'
 
 import { processCpuUsage } from './cpu-usage'
 import { processEventLoopDelay, isMonitorEventLoopDelaySupported } from './event-loop-delay'
+import {
+  isEventLoopUtilizationSupported,
+  processEventLoopUtilization,
+} from './event-loop-utilization'
 import { processGcDuration } from './gc'
 import { processHeapSpace } from './heap-space'
 import { processMemoryUsage } from './memory-usage'
@@ -25,6 +29,7 @@ export function processMetrics(
     heapSpace = true,
     gc = true,
     eventLoopDelay = isMonitorEventLoopDelaySupported,
+    eventLoopUtilization = isEventLoopUtilizationSupported,
   }: ProcessOptions,
   done: () => void,
 ) {
@@ -66,6 +71,10 @@ export function processMetrics(
 
   if (gc !== false) {
     telemetry.use(processGcDuration, mergeOptions(gc))
+  }
+
+  if (eventLoopUtilization !== false) {
+    telemetry.use(processEventLoopUtilization, mergeOptions(eventLoopUtilization))
   }
 
   if (eventLoopDelay !== false) {

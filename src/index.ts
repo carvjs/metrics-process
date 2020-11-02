@@ -5,6 +5,7 @@ export * from './process'
 
 export * from './cpu-usage'
 export * from './event-loop-delay'
+export * from './event-loop-utilization'
 export * from './gc'
 export * from './heap-space'
 export * from './memory-usage'

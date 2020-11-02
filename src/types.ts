@@ -9,6 +9,8 @@ export interface ProcessCommonOptions {
 
 export interface ProcessCpuUsageOptions extends ProcessCommonOptions {}
 
+export interface ProcessEventLoopUtilizationOptions extends ProcessCommonOptions {}
+
 export interface ProcessEventLoopDelayOptions extends ProcessCommonOptions {
   /**
    * The sampling rate in milliseconds (default: `10`)
@@ -44,6 +46,7 @@ export interface ProcessOptions {
   labels?: Labels
 
   cpu?: boolean | ProcessCpuUsageOptions
+  eventLoopUtilization?: boolean | ProcessEventLoopUtilizationOptions
   eventLoopDelay?: boolean | ProcessEventLoopDelayOptions
   gc?: boolean | ProcessGcDurationOptions
   heapSpace?: boolean | ProcessHeapSpaceOptions

@@ -6,7 +6,10 @@ import { performance } from 'perf_hooks'
 
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import processMetrics, { isMonitorEventLoopDelaySupported } from '../src'
+import processMetrics, {
+  isMonitorEventLoopDelaySupported,
+  isEventLoopUtilizationSupported,
+} from '../src'
 
 jest.useFakeTimers()
 
@@ -23,7 +26,7 @@ beforeEach(() => {
 afterEach(() => telemetry.shutdown())
 
 test('processMetrics', async () => {
-  if (!isMonitorEventLoopDelaySupported) {
+  if (!(isMonitorEventLoopDelaySupported || isEventLoopUtilizationSupported)) {
     telemetry.log.warn = jest.fn()
   }
 
@@ -31,7 +34,7 @@ test('processMetrics', async () => {
 
   await telemetry.ready()
 
-  if (!isMonitorEventLoopDelaySupported) {
+  if (!(isMonitorEventLoopDelaySupported || isEventLoopUtilizationSupported)) {
     expect(telemetry.log.warn).not.toHaveBeenCalled()
   }
 
@@ -74,6 +77,22 @@ if (!isMonitorEventLoopDelaySupported) {
     expect(telemetry.log.warn).toHaveBeenCalledWith(
       '[%s] Monitoring the event loop delay is not supported on Node.js %s',
       'process_event_loop_delay',
+      process.version,
+    )
+  })
+}
+
+if (!isEventLoopUtilizationSupported) {
+  test('processMetrics (warn missing event loop utilization support)', async () => {
+    telemetry.log.warn = jest.fn()
+
+    telemetry.use(processMetrics, { eventLoopUtilization: true })
+
+    await telemetry.ready()
+
+    expect(telemetry.log.warn).toHaveBeenCalledWith(
+      '[%s] Monitoring the event loop utilization is not supported on Node.js %s',
+      'process_event_loop_utilization',
       process.version,
     )
   })
