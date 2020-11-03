@@ -5,7 +5,7 @@ import { promisify } from 'util'
 
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processGcDuration } from '../src'
+import { gcDuration } from '../src'
 
 jest.useFakeTimers()
 
@@ -21,8 +21,8 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-test('processGcDuration', async () => {
-  telemetry.use(processGcDuration)
+test('gcDuration', async () => {
+  telemetry.use(gcDuration)
 
   await telemetry.ready()
 

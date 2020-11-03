@@ -6,10 +6,7 @@ import { performance } from 'perf_hooks'
 
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import processMetrics, {
-  isMonitorEventLoopDelaySupported,
-  isEventLoopUtilizationSupported,
-} from '../src'
+import processMetrics, { isEventLoopDelaySupported, isEventLoopUtilizationSupported } from '../src'
 
 jest.useFakeTimers()
 
@@ -26,7 +23,7 @@ beforeEach(() => {
 afterEach(() => telemetry.shutdown())
 
 test('processMetrics', async () => {
-  if (!(isMonitorEventLoopDelaySupported || isEventLoopUtilizationSupported)) {
+  if (!(isEventLoopDelaySupported || isEventLoopUtilizationSupported)) {
     telemetry.log.warn = jest.fn()
   }
 
@@ -34,7 +31,7 @@ test('processMetrics', async () => {
 
   await telemetry.ready()
 
-  if (!(isMonitorEventLoopDelaySupported || isEventLoopUtilizationSupported)) {
+  if (!(isEventLoopDelaySupported || isEventLoopUtilizationSupported)) {
     expect(telemetry.log.warn).not.toHaveBeenCalled()
   }
 
@@ -53,7 +50,7 @@ test('processMetrics', async () => {
   const metrics = await telemetry.collect()
 
   expect(metrics).toMatch('# TYPE process_cpu_user_seconds_total counter')
-  if (isMonitorEventLoopDelaySupported) {
+  if (isEventLoopDelaySupported) {
     expect(metrics).toMatch('# TYPE process_event_loop_delay_min_seconds gauge')
   } else {
     expect(metrics).not.toMatch('# TYPE process_event_loop_delay_min_seconds gauge')
@@ -66,7 +63,7 @@ test('processMetrics', async () => {
   expect(metrics).toMatch('# TYPE process_version_info gauge')
 })
 
-if (!isMonitorEventLoopDelaySupported) {
+if (!isEventLoopDelaySupported) {
   test('processMetrics (warn missing event loop monitoring support)', async () => {
     telemetry.log.warn = jest.fn()
 

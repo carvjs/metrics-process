@@ -4,7 +4,7 @@ import { Telemetry } from '@carv/telemetry'
 
 import { ProcessHeapSpaceOptions } from './types'
 
-export function processHeapSpace(
+export function heapSpace(
   telemetry: Telemetry,
   {
     prefix = 'process',

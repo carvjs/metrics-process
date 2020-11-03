@@ -6,7 +6,7 @@ import { performance } from 'perf_hooks'
 
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processHeapSpace } from '../src'
+import { heapSpace } from '../src'
 
 jest.useFakeTimers()
 
@@ -22,8 +22,8 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-test('processHeapSpace', async () => {
-  telemetry.use(processHeapSpace)
+test('heapSpace', async () => {
+  telemetry.use(heapSpace)
 
   await telemetry.ready()
 

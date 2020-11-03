@@ -5,7 +5,7 @@ import { millisToSeconds } from '@carv/time'
 
 import { ProcessStartTimeOptions } from './types'
 
-export function processStartTime(
+export function startTime(
   telemetry: Telemetry,
   {
     prefix = 'process',

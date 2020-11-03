@@ -2,20 +2,23 @@ import { Telemetry } from '@carv/telemetry'
 
 import { ProcessOptions, ProcessCommonOptions } from './types'
 
-import { processCpuUsage } from './cpu-usage'
-import { processEventLoopDelay, isMonitorEventLoopDelaySupported } from './event-loop-delay'
+import { cpuUsage as processCpuUsage } from './cpu-usage'
+import {
+  isEventLoopDelaySupported,
+  eventLoopDelay as processEventLoopDelay,
+} from './event-loop-delay'
 import {
   isEventLoopUtilizationSupported,
-  processEventLoopUtilization,
+  eventLoopUtilization as processEventLoopUtilization,
 } from './event-loop-utilization'
-import { processGcDuration } from './gc'
-import { processHeapSpace } from './heap-space'
-import { processMemoryUsage } from './memory-usage'
-import { processStartTime } from './start-time'
-import { processUptime } from './uptime'
-import { processVersion } from './version'
+import { gcDuration as processGcDuration } from './gc'
+import { heapSpace as processHeapSpace } from './heap-space'
+import { memoryUsage as processMemoryUsage } from './memory-usage'
+import { startTime as processStartTime } from './start-time'
+import { uptime as processUptime } from './uptime'
+import { version as processVersion } from './version'
 
-export function processMetrics(
+export function metrics(
   telemetry: Telemetry,
   {
     prefix = '',
@@ -28,7 +31,7 @@ export function processMetrics(
     memory = true,
     heapSpace = true,
     gc = true,
-    eventLoopDelay = isMonitorEventLoopDelaySupported,
+    eventLoopDelay = isEventLoopDelaySupported,
     eventLoopUtilization = isEventLoopUtilizationSupported,
   }: ProcessOptions,
   done: () => void,

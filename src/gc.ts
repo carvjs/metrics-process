@@ -14,7 +14,7 @@ kinds[constants.NODE_PERFORMANCE_GC_MINOR] = 'minor'
 kinds[constants.NODE_PERFORMANCE_GC_INCREMENTAL] = 'incremental'
 kinds[constants.NODE_PERFORMANCE_GC_WEAKCB] = 'weakcb'
 
-export function processGcDuration(
+export function gcDuration(
   telemetry: Telemetry,
   {
     prefix = 'process',

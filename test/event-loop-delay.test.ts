@@ -6,7 +6,7 @@ import { performance } from 'perf_hooks'
 
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processEventLoopDelay, isMonitorEventLoopDelaySupported } from '../src'
+import { eventLoopDelay, isEventLoopDelaySupported } from '../src'
 
 jest.useFakeTimers()
 
@@ -22,9 +22,9 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-if (isMonitorEventLoopDelaySupported) {
-  test('processEventLoopDelay', async () => {
-    telemetry.use(processEventLoopDelay, { resolution: 1 })
+if (isEventLoopDelaySupported) {
+  test('eventLoopDelay', async () => {
+    telemetry.use(eventLoopDelay, { resolution: 1 })
 
     await telemetry.ready()
 
@@ -83,8 +83,8 @@ if (isMonitorEventLoopDelaySupported) {
     )
   })
 } else {
-  test('processEventLoopDelay', async () => {
-    telemetry.use(processEventLoopDelay)
+  test('eventLoopDelay', async () => {
+    telemetry.use(eventLoopDelay)
 
     telemetry.log.warn = jest.fn()
 

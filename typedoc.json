@@ -1,0 +1,13 @@
+{
+  "inputFiles": ["./src"],
+  "entryPoint": "\"index\"",
+  "mode": "library",
+  "out": "docs",
+  "readme": "none",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "stripInternal": true,
+  "plugin": "typedoc-plugin-markdown",
+  "gitRevision": "main",
+  "hideProjectName": true
+}

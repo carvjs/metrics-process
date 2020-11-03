@@ -6,7 +6,7 @@ import { ProcessEventLoopUtilizationOptions } from './types'
 
 export const isEventLoopUtilizationSupported = Boolean(performance.eventLoopUtilization)
 
-export function processEventLoopUtilization(
+export function eventLoopUtilization(
   telemetry: Telemetry,
   {
     prefix = 'process',

@@ -6,7 +6,7 @@ import { performance } from 'perf_hooks'
 
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processEventLoopUtilization, isEventLoopUtilizationSupported } from '../src'
+import { eventLoopUtilization, isEventLoopUtilizationSupported } from '../src'
 
 jest.useFakeTimers()
 
@@ -23,8 +23,8 @@ beforeEach(() => {
 afterEach(() => telemetry.shutdown())
 
 if (isEventLoopUtilizationSupported) {
-  test('processEventLoopUtilization', async () => {
-    telemetry.use(processEventLoopUtilization)
+  test('eventLoopUtilization', async () => {
+    telemetry.use(eventLoopUtilization)
 
     await telemetry.ready()
 
@@ -45,8 +45,8 @@ if (isEventLoopUtilizationSupported) {
     expect(metrics).toMatch(/^process_event_loop_utilization \d+(?:\.\d+)? \d{13}$/m)
   })
 } else {
-  test('processEventLoopUtilization', async () => {
-    telemetry.use(processEventLoopUtilization)
+  test('eventLoopUtilization', async () => {
+    telemetry.use(eventLoopUtilization)
 
     telemetry.log.warn = jest.fn()
 

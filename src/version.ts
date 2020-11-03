@@ -2,7 +2,7 @@ import { Telemetry } from '@carv/telemetry'
 
 import { ProcessVersionOptions } from './types'
 
-export function processVersion(
+export function version(
   telemetry: Telemetry,
   {
     prefix = 'process',

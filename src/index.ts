@@ -1,4 +1,4 @@
-export { processMetrics as default } from './process'
+export { metrics as default } from './process'
 
 export * from './types'
 export * from './process'

@@ -2,7 +2,7 @@ import { Telemetry } from '@carv/telemetry'
 
 import { ProcessMemoryUsageOptions } from './types'
 
-export function processMemoryUsage(
+export function memoryUsage(
   telemetry: Telemetry,
   {
     prefix = 'process',

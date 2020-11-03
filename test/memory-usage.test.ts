@@ -3,7 +3,7 @@
  */
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processMemoryUsage } from '../src'
+import { memoryUsage } from '../src'
 
 jest.useFakeTimers()
 
@@ -17,8 +17,8 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-test('processMemoryUsage', async () => {
-  telemetry.use(processMemoryUsage)
+test('memoryUsage', async () => {
+  telemetry.use(memoryUsage)
 
   await telemetry.ready()
 

@@ -3,7 +3,7 @@
  */
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processCpuUsage } from '../src'
+import { cpuUsage } from '../src'
 
 jest.useFakeTimers()
 
@@ -17,8 +17,8 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-test('processCpuUsage', async () => {
-  telemetry.use(processCpuUsage)
+test('cpuUsage', async () => {
+  telemetry.use(cpuUsage)
 
   await telemetry.ready()
 
@@ -43,8 +43,8 @@ test('processCpuUsage', async () => {
   expect(metrics).toMatch(/^process_cpu_seconds_total \d+(?:\.\d+)? \d{13}$/m)
 })
 
-test('processCpuUsage (with labels)', async () => {
-  telemetry.use(processCpuUsage, { labels: { one: 'two' } })
+test('cpuUsage (with labels)', async () => {
+  telemetry.use(cpuUsage, { labels: { one: 'two' } })
 
   await telemetry.ready()
 
@@ -69,8 +69,8 @@ test('processCpuUsage (with labels)', async () => {
   expect(metrics).toMatch(/^process_cpu_seconds_total\{one="two"} \d+(?:\.\d+)? \d{13}$/m)
 })
 
-test('processCpuUsage (custom prefix)', async () => {
-  telemetry.use(processCpuUsage, { prefix: 'nodejs' })
+test('cpuUsage (custom prefix)', async () => {
+  telemetry.use(cpuUsage, { prefix: 'nodejs' })
 
   await telemetry.ready()
 
@@ -95,8 +95,8 @@ test('processCpuUsage (custom prefix)', async () => {
   expect(metrics).toMatch(/^nodejs_cpu_seconds_total \d+(?:\.\d+)? \d{13}$/m)
 })
 
-test('processCpuUsage (custom name)', async () => {
-  telemetry.use(processCpuUsage, { name: 'core' })
+test('cpuUsage (custom name)', async () => {
+  telemetry.use(cpuUsage, { name: 'core' })
 
   await telemetry.ready()
 

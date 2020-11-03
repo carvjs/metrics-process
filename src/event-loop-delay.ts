@@ -7,9 +7,9 @@ import { nanosToSeconds } from '@carv/time'
 
 import { ProcessEventLoopDelayOptions } from './types'
 
-export const isMonitorEventLoopDelaySupported = Boolean(monitorEventLoopDelay)
+export const isEventLoopDelaySupported = Boolean(monitorEventLoopDelay)
 
-export function processEventLoopDelay(
+export function eventLoopDelay(
   telemetry: Telemetry,
   {
     prefix = 'process',
@@ -22,7 +22,7 @@ export function processEventLoopDelay(
   }: ProcessEventLoopDelayOptions,
   done: () => void,
 ) {
-  if (!isMonitorEventLoopDelaySupported) {
+  if (!isEventLoopDelaySupported) {
     telemetry.log.warn(
       '[%s] Monitoring the event loop delay is not supported on Node.js %s',
       telemetry.makeName(prefix, name),
@@ -66,7 +66,9 @@ export function processEventLoopDelay(
   const resolutionNanos = resolution * 1e6
 
   const percentileObservation = (percentile: number, index: number) =>
-    metrics[index].observation(eventLoopDelay(histogram.percentile(percentile), resolutionNanos))
+    metrics[index].observation(
+      eventLoopDelayInSeconds(histogram.percentile(percentile), resolutionNanos),
+    )
 
   telemetry.createBatchObserver({ name: prefix + name, labels }, observer => {
     if (
@@ -76,10 +78,10 @@ export function processEventLoopDelay(
     ) {
       observer.observe([
         ...percentiles.map(percentileObservation),
-        delayMinimum.observation(eventLoopDelay(histogram.min, resolutionNanos)),
-        delayMaximum.observation(eventLoopDelay(histogram.max, resolutionNanos)),
-        delayMean.observation(eventLoopDelay(histogram.mean, resolutionNanos)),
-        delayStddev.observation(eventLoopDelay(histogram.stddev, resolutionNanos)),
+        delayMinimum.observation(eventLoopDelayInSeconds(histogram.min, resolutionNanos)),
+        delayMaximum.observation(eventLoopDelayInSeconds(histogram.max, resolutionNanos)),
+        delayMean.observation(eventLoopDelayInSeconds(histogram.mean, resolutionNanos)),
+        delayStddev.observation(eventLoopDelayInSeconds(histogram.stddev, resolutionNanos)),
       ])
     }
 
@@ -96,6 +98,6 @@ export function processEventLoopDelay(
   done()
 }
 
-function eventLoopDelay(value: number, resolutionNanos: number) {
+function eventLoopDelayInSeconds(value: number, resolutionNanos: number) {
   return nanosToSeconds(Math.max(0, value - resolutionNanos))
 }

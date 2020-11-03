@@ -3,7 +3,7 @@
  */
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processVersion } from '../src'
+import { version } from '../src'
 
 jest.useFakeTimers()
 
@@ -17,8 +17,8 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-test('processVersion', async () => {
-  telemetry.use(processVersion)
+test('version', async () => {
+  telemetry.use(version)
 
   await telemetry.ready()
 

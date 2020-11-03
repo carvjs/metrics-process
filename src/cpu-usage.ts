@@ -3,7 +3,7 @@ import { microsToSeconds } from '@carv/time'
 
 import { ProcessCpuUsageOptions } from './types'
 
-export function processCpuUsage(
+export function cpuUsage(
   telemetry: Telemetry,
   {
     prefix = 'process',

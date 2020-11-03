@@ -2,7 +2,7 @@ import { Telemetry } from '@carv/telemetry'
 
 import { ProcessUptimeOptions } from './types'
 
-export function processUptime(
+export function uptime(
   telemetry: Telemetry,
   {
     prefix = 'process',

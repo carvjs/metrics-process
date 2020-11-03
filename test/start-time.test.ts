@@ -3,7 +3,7 @@
  */
 import { Telemetry, TestLogger } from '@carv/telemetry'
 
-import { processStartTime } from '../src'
+import { startTime } from '../src'
 
 jest.useFakeTimers()
 
@@ -17,8 +17,8 @@ beforeEach(() => {
 
 afterEach(() => telemetry.shutdown())
 
-test('processStartTime', async () => {
-  telemetry.use(processStartTime)
+test('startTime', async () => {
+  telemetry.use(startTime)
 
   await telemetry.ready()
 
